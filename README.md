@@ -29,9 +29,9 @@ char *get_next_line(int fd);
 * free
 
 ### Description
-~~_Write a function that returns a line read from a file descriptor._~~
+❌ ~~_Write a function that returns a line read from a file descriptor._~~
 
-_How to hate yourself and memory management._
+✅ _How to hate yourself and memory management._
 
 ### Subject
 **[🇫🇷 Link to the subject here](https://github.com/leogaudin/get_next_line/blob/main/fr.subject.pdf)**
