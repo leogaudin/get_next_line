@@ -6,7 +6,7 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 17:30:18 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/05/04 23:16:49 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/05/05 00:06:56 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
+/**
+ * @brief
+ * Takes the current stash and a buffer, and returns
+ * the appended stash.
+ *
+ * @param    stash     the stash to append
+ * @param    buffer    the buffer to append to the stash
+ * @return   char*     the updated stash
+ */
 char	*append_to_stash(char *stash, char *buffer)
 {
 	char	*temp;
@@ -24,7 +33,22 @@ char	*append_to_stash(char *stash, char *buffer)
 	return (temp);
 }
 
-char	*read_to_buffer(int fd, char *stash)
+/**
+ * @brief
+ * Reads from a file descriptor and appends its contents
+ * (until a '\n' is encountered) to the provided stash.
+ *
+ * If the stash is empty (e.g. because it is the first call
+ * of get_next_line), initialises with calloc.
+ *
+ * If the read fails, frees the buffer and the stash, then
+ * returns NULL.
+ *
+ * @param    fd        the descriptor of the file to read
+ * @param    stash     the stash to append
+ * @return   char*     the appended stash
+ */
+char	*read_to_stash(int fd, char *stash)
 {
 	int		read_bytes;
 	char	*buffer;
@@ -51,6 +75,19 @@ char	*read_to_buffer(int fd, char *stash)
 	return (stash);
 }
 
+/**
+ * @brief
+ * Takes the provided stash and removes the characters
+ * before the first '\n' (included), then returns the
+ * updated version.
+ *
+ * If the stash has only one line left, it is freed and
+ * the return value is NULL.
+ *
+ * @param    stash
+ * @param    nl_index  the index of the '\n'
+ * @return   char*     the purged stash
+ */
 char	*get_new_stash(char *stash, int nl_index)
 {
 	char	*new_stash;
@@ -74,6 +111,18 @@ char	*get_new_stash(char *stash, int nl_index)
 	return (new_stash);
 }
 
+/**
+ * @brief
+ * Takes the stash (i.e. accumulation of read buffers)
+ * and returns all of the characters before '\n',
+ * including the latter.
+ *
+ * If the stash is empty, it returns a null pointer.
+ *
+ *
+ * @param    stash
+ * @return   char*     the first "line" of the stash.
+ */
 char	*stash_to_line(char *stash)
 {
 	char	*line;
@@ -95,6 +144,20 @@ char	*stash_to_line(char *stash)
 	return (line);
 }
 
+/**
+ * @brief
+ * Takes a file descriptor and returns the next line
+ * encountered.
+ *
+ * If:
+ * - the file descriptor is invalid,
+ * - BUFFER_SIZE is null or negative,
+ * - read() on fd fails,
+ * frees the stash and returns NULL.
+ *
+ * @param    fd        the descriptor of the file to read
+ * @return   char*     explanation
+ */
 char	*get_next_line(int fd)
 {
 	static char	*stash[10240];
@@ -105,7 +168,7 @@ char	*get_next_line(int fd)
 		free(stash[fd]);
 		return (0);
 	}
-	stash[fd] = read_to_buffer(fd, stash[fd]);
+	stash[fd] = read_to_stash(fd, stash[fd]);
 	line = stash_to_line(stash[fd]);
 	stash[fd] = get_new_stash(stash[fd], get_nl_index(stash[fd]));
 	return (line);
