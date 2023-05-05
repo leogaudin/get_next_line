@@ -6,11 +6,11 @@
 /*   By: lgaudin <lgaudin@student.42malaga.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 17:30:18 by lgaudin           #+#    #+#             */
-/*   Updated: 2023/05/05 00:06:56 by lgaudin          ###   ########.fr       */
+/*   Updated: 2023/05/05 15:23:35 by lgaudin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <sys/stat.h>
