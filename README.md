@@ -4,7 +4,7 @@
 	<a href="https://github.com/xicodomingues/francinette"><img src="https://img.shields.io/badge/francinette-passing-success" /></a>
 	<a href="https://github.com/Tripouille/gnlTester"><img src="https://img.shields.io/badge/gnlTester-passing-success" /></a>
 	<img src="https://img.shields.io/badge/bonuses-included-success"/>
-	<img src="https://img.shields.io/badge/moulinette-125%2F100-success?logo=42" />
+	<img src="https://img.shields.io/badge/moulinette-125%2F100-success?logo=42&logoColor=fff" />
 </div>
 
 ## 💡 About
