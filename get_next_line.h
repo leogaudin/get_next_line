@@ -16,10 +16,14 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 50
 # endif
-# include "./get_next_line_utils.h"
 # include <stdlib.h>
 # include <unistd.h>
 
+int		ft_strlen(char const *str);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *s, int c);
+void	*ft_calloc(size_t nelem, size_t elsize);
+int		get_nl_index(char *stash);
 char	*get_next_line(int fd);
 
 #endif
